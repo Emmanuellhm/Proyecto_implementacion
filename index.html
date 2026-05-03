@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -157,7 +158,7 @@
 
         .loader {
             display: none;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top: 3px solid white;
             width: 20px;
@@ -167,17 +168,23 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="form-container">
         <div class="form-header">
             <h2>Únete al Proyecto</h2>
-            <p>Ingresa tus datos y te enviaremos la información directo a la base de datos.</p>
+            <p>Ingresa tus datos para enviar la información a la base de datos.</p>
         </div>
 
         <div id="alertMessage" class="alert"></div>
@@ -187,7 +194,7 @@
                 <label for="nombre">Nombre completo</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
             </div>
-            
+
             <div class="input-group">
                 <label for="email">Correo electrónico</label>
                 <input type="email" id="email" name="email" placeholder="juan@ejemplo.com" required>
@@ -214,8 +221,8 @@
         // IMPORTANTE: Debes reemplazar estos valores con los de tu propio proyecto.
         // Ve a supabase.com -> Settings -> API y copia tu URL y tu "anon" public key.
         // ==============================================================================
-        const SUPABASE_URL = 'TU_SUPABASE_URL_AQUI';
-        const SUPABASE_ANON_KEY = 'TU_SUPABASE_ANON_KEY_AQUI';
+        const SUPABASE_URL = 'https://jcddsibiycrawtfnudnk.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vIoG8dpBM4nO3H5IYzyDww_Hm76KIVW';
 
         // Inicializamos el cliente de Supabase
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -249,10 +256,10 @@
                 const { data, error } = await supabase
                     .from('mensajes')
                     .insert([
-                        { 
-                            nombre: nombre, 
-                            email: email, 
-                            mensaje: mensaje 
+                        {
+                            nombre: nombre,
+                            email: email,
+                            mensaje: mensaje
                         }
                     ]);
 
@@ -261,13 +268,13 @@
                 // Si todo sale bien, mostramos mensaje de éxito y limpiamos el formulario
                 showAlert('¡Tus datos se guardaron correctamente en la base de datos!', 'success');
                 form.reset();
-                
+
             } catch (error) {
                 // Si hay un error (ej. credenciales inválidas o tabla no existe)
                 console.error("Error de Supabase:", error);
-                
+
                 // Mensaje amigable si olvidaste poner las credenciales
-                if(SUPABASE_URL === 'TU_SUPABASE_URL_AQUI') {
+                if (SUPABASE_URL === 'TU_SUPABASE_URL_AQUI') {
                     showAlert('Error: Debes colocar tu URL y KEY de Supabase en el código HTML.', 'error');
                 } else {
                     showAlert('Hubo un error al guardar. Asegúrate de haber creado la tabla "mensajes".', 'error');
@@ -287,4 +294,5 @@
         }
     </script>
 </body>
+
 </html>
