@@ -225,7 +225,7 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjZGRzaWJpeWNyYXd0Zm51ZG5rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MzYyMTQsImV4cCI6MjA5MzQxMjIxNH0.JeajEmnpSNuNqOC-bg0F_NslXKP3XrWwy8g0T0xIyAU';
 
         // Inicializamos el cliente de Supabase
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // Obtenemos las referencias a los elementos de HTML
         const form = document.getElementById('contactForm');
@@ -253,7 +253,7 @@
                 // 3. INSERTAR DATOS EN SUPABASE
                 // IMPORTANTE: Asegúrate de tener una tabla en Supabase llamada 'mensajes'
                 // La tabla debe tener columnas con estos mismos nombres: nombre (text), email (text), mensaje (text)
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('mensajes')
                     .insert([
                         {
